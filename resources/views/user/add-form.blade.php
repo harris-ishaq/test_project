@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-md-8 col-lg-8">
-                                <form action="{{ url('transactions/store') }}" method="post">
+                                <form action="{{ url('user-transactions/store') }}" method="post">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-6 col-lg-6">

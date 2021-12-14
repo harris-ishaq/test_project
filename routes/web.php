@@ -71,6 +71,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::group(['prefix' => 'user-transactions'], function () {
         Route::get('/list', [App\Http\Controllers\User\UserTransactionController::class, 'index']);
         Route::get('/create', [App\Http\Controllers\User\UserTransactionController::class, 'create']);
+        Route::post('/store', [App\Http\Controllers\User\UserTransactionController::class, 'store']);
     });
 });
 

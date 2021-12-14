@@ -59,7 +59,7 @@
                                     <div class="form-group">
                                         <label>Nama</label>
                                         <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                                            value="{{ $edit ? $data->name : old('name') }}">
+                                            value="{{ $edit ? $data->name : old('name') }}" {{ $edit ? ($data->hasRole('Pengguna') ? 'readonly' : '') : '' }}>
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -70,7 +70,7 @@
                                         <label>Nama Pengguna</label>
                                         <input type="hidden" name="id" id="id" value="{{ $edit ? $data->id : old('id') }}">
                                         <input type="text" name="username" class="form-control @error('username') is-invalid @enderror"
-                                            value="{{ $edit ? $data->username : old('username') }}">
+                                            value="{{ $edit ? $data->username : old('username') }}" {{ $edit ? ($data->hasRole('Pengguna') ? 'readonly' : '') : '' }}>
                                         @error('username')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -79,12 +79,27 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Hak Akses</label>
-                                        <select class="form-control @error('role') is-invalid @enderror" name="role">
-                                            <option hidden >Pilih Level Pengguna</option>
-                                            @foreach ($roles as $role)
-                                                <option value="{{ $role->id }}" {{ $edit ? ($role->id == $data->roles->pluck('id')->first() ? 'selected' : '') : '' }}>{{ $role->name }}</option>
-                                            @endforeach
-                                        </select>
+                                        @if ($edit)
+                                            @if ($data->hasRole('Pengguna'))
+                                                <input type="text" name="role-name" class="form-control @error('role') is-invalid @enderror"
+                                                value="Pengguna" {{ $edit ? ($data->hasRole('Pengguna') ? 'readonly' : '') : '' }}>
+                                                <input type="hidden" name="role" value="{{ $data->roles->pluck('id')->first() }}">
+                                            @else
+                                                <select class="form-control @error('role') is-invalid @enderror" name="role">
+                                                    <option hidden >Pilih Level Pengguna</option>
+                                                    @foreach ($roles as $role)
+                                                        <option value="{{ $role->id }}" {{ $edit ? ($role->id == $data->roles->pluck('id')->first() ? 'selected' : '') : '' }}>{{ $role->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            @endif
+                                        @else
+                                            <select class="form-control @error('role') is-invalid @enderror" name="role">
+                                                <option hidden >Pilih Level Pengguna</option>
+                                                @foreach ($roles as $role)
+                                                    <option value="{{ $role->id }}" {{ $edit ? ($role->id == $data->roles->pluck('id')->first() ? 'selected' : '') : '' }}>{{ $role->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        @endif
                                         @error('role')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

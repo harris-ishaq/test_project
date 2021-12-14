@@ -45,7 +45,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label>Nama Pengguna</label>
+                                        <label>NIS</label>
                                         <!-- <input type="hidden" name="id" id="id" value="{{ $data ? $data->id : old('id') }}"> -->
                                         <input type="text" name="username" class="form-control @error('username') is-invalid @enderror"
                                             value="{{ $data ? $data->nis : old('username') }}" readonly>
