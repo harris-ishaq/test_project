@@ -41,6 +41,7 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('{data}/destroy', [App\Http\Controllers\MData\StudentController::class, 'destroy']);
         Route::get('/search', [App\Http\Controllers\MData\StudentController::class, 'search']);
         Route::get('/get-student', [App\Http\Controllers\MData\StudentController::class, 'get']);
+        Route::get('/{data}/add-as-users', [App\Http\Controllers\MData\UserController::class, 'addStudentAsUser']);
 	});
 
     Route::group(['prefix' => 'books'], function () {
@@ -65,6 +66,11 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('/{transaction}/cancel', [App\Http\Controllers\Transaksi\TransactionController::class, 'cancel']);
         Route::get('/denda', [App\Http\Controllers\Transaksi\TransactionController::class, 'indexDenda']);
         Route::get('/denda/{transaction}', [App\Http\Controllers\Transaksi\TransactionController::class, 'bayar']);
+    });
+
+    Route::group(['prefix' => 'user-transactions'], function () {
+        Route::get('/list', [App\Http\Controllers\User\UserTransactionController::class, 'index']);
+        Route::get('/create', [App\Http\Controllers\User\UserTransactionController::class, 'create']);
     });
 });
 

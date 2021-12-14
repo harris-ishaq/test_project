@@ -7,6 +7,7 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Student;
 use Spatie\Permission\Models\Role;
 use DB;
 use Hash;
@@ -145,5 +146,19 @@ class UserController extends Controller
         $user->delete();
         return redirect('users/')
             ->withSuccess(__('Data Pengguna berhasil dihapus.'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function addStudentAsUser(Student $data)
+    {
+        return view('mdata.siswa.add-users',
+        [
+            'data' => $data,
+            'role' => Role::where('name', 'Pengguna')->first()
+        ]);
     }
 }

@@ -5,7 +5,7 @@
         <meta
             content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no"
             name="viewport">
-        <title>SIM Perpustakaan &mdash; SDN</title>
+        <title>SIM Perpustakaan &mdash; SDN 001 Muara Bengal</title>
 
         <!-- General CSS Files -->
         <link

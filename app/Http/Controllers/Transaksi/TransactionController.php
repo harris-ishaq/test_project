@@ -250,10 +250,10 @@ class TransactionController extends Controller
         $transaction->status = 'aktif';
         $transaction->date_returned = null;
 
-        // Cek jika data buku yang baru tidak sama dengan data buku yang lama untuk memperbarui stok buku
+        // Cek stok buku
         $book = Book::where('id', $transaction->books_id)->first();
         if ($book->qty != 0){
-            $book->qty = $book->qty + 1;
+            $book->qty = $book->qty - 1;
             $book->save();
         }
 
@@ -272,6 +272,24 @@ class TransactionController extends Controller
     public function indexDenda()
     {
         //$transaksi = Transaction::where('status', 'aktif')->latest()->paginate(5);
+        return view('transaksi.index-denda', [
+            'datas' => Transaction::where('status', 'denda')->orderBy('updated_at', 'desc')->paginate(5)
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function bayar(Transaction $transaction)
+    {
+        // Update variable untuk kondisi batal
+        $transaction->status = 'selesai';
+
+        // Save update data
+        $transaction->save();
+
         return view('transaksi.index-denda', [
             'datas' => Transaction::where('status', 'denda')->orderBy('updated_at', 'desc')->paginate(5)
         ]);

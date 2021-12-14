@@ -20,7 +20,7 @@ class CreateAdminUserSeeder extends Seeder
         $user = User::create([
             'name' => 'Harris Ishaq',
             'username' => 'admin',
-            'password' => Hash::make('admin123')
+            'password' => bcrypt('admin123')
         ]);
 
         $role = Role::create(['name' => 'Admin']);
@@ -32,5 +32,7 @@ class CreateAdminUserSeeder extends Seeder
         $user->assignRole([$role->id]);
 
         Role::create(['name' => 'Pengguna']);
+        Role::create(['name' => 'Staff Sekolah']);
+
     }
 }
