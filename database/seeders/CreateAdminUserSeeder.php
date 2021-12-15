@@ -32,7 +32,7 @@ class CreateAdminUserSeeder extends Seeder
         $user->assignRole([$role->id]);
 
         Role::create(['name' => 'Pengguna']);
-        Role::create(['name' => 'Staff Sekolah']);
+        Role::create(['name' => 'Kepala Sekolah']);
 
     }
 }

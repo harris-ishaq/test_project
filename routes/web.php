@@ -17,7 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes([
+    'register' => false, // Register Routes...
+    'reset' => false, // Reset Password Routes...
+    'verify' => false, // Email Verification Routes...
+]);
+
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -73,8 +78,11 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('/create', [App\Http\Controllers\User\UserTransactionController::class, 'create']);
         Route::post('/store', [App\Http\Controllers\User\UserTransactionController::class, 'store']);
     });
-});
 
-Auth::routes(['register' => false]);
+    Route::group(['prefix' => 'reports'], function () {
+        Route::get('/', [App\Http\Controllers\ReportController::class, 'index']);
+        Route::post('/download', [App\Http\Controllers\ReportController::class, 'download']);
+    });
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

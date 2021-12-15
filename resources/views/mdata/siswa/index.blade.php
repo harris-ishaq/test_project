@@ -25,10 +25,7 @@
                     </form>
                 </div>
                 <div class="card-header-button">
-                <!-- <div class="float-right"> -->
-                <a href="{{ url('students/create') }}" class="btn btn-lg btn-icon icon-left btn-primary" style="border-radius: 5px !important;"><i class="fas fa-user-plus"></i> Tambah Siswa</a>
-                    <!-- </div> -->
-
+                    <a href="{{ url('students/create') }}" class="btn btn-lg btn-icon icon-left btn-primary" style="border-radius: 5px !important;"><i class="fas fa-user-plus"></i> Tambah Siswa</a>
                 </div>
             </div>
             <div class="card-body">

@@ -51,7 +51,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="blank.html">
+                    <a class="nav-link" href="{{ url('reports/') }}">
                         <i class="fas fa-file"></i>
                         <span>Laporan</span>
                     </a>
