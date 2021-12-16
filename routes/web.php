@@ -71,6 +71,7 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('/{transaction}/cancel', [App\Http\Controllers\Transaksi\TransactionController::class, 'cancel']);
         Route::get('/denda', [App\Http\Controllers\Transaksi\TransactionController::class, 'indexDenda']);
         Route::get('/denda/{transaction}', [App\Http\Controllers\Transaksi\TransactionController::class, 'bayar']);
+        Route::get('/search', [App\Http\Controllers\Transaksi\TransactionController::class, 'search']);
     });
 
     Route::group(['prefix' => 'user-transactions'], function () {

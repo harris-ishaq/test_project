@@ -24,8 +24,8 @@ class CreateAdminUserSeeder extends Seeder
         ]);
 
         $role = Role::create(['name' => 'Admin']);
-
-        $permissions = Permission::pluck('id','id')->all();
+        $listPermissionAdmin = explode(',', config('permission_list.permission.Admin'));
+        $permissions = Permission::whereIn('name', )->pluck('id','id')->all();
 
         $role->syncPermissions($permissions);
 

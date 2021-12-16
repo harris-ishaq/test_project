@@ -50,7 +50,7 @@
                         <span>Denda</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Request::is('reports*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ url('reports/') }}">
                         <i class="fas fa-file"></i>
                         <span>Laporan</span>
@@ -72,10 +72,10 @@
                 </li>
             @elseif (Auth::user()->hasRole('Kepala Sekolah'))
                 <li class="menu-header" style="color: #A23E48; font-weight: bold;">Laporan</li>
-                <li class="nav-item {{ Request::is('staff-report*') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ url('transactions/') }}">
-                        <i class="fas fa-exchange-alt"></i>
-                        <span>Pinjam Buku</span>
+                <li class="nav-item {{ Request::is('reports*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ url('reports/') }}">
+                        <i class="fas fa-file"></i>
+                        <span>Laporan</span>
                     </a>
                 </li>
             @endif

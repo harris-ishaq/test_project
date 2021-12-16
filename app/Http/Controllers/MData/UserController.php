@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\MData;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
@@ -20,10 +21,10 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','show']]);
-        $this->middleware('permission:user-create', ['only' => ['create','store']]);
-        $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:permission-user', ['only' => ['index','create','store','edit','update','destroy','search','addStudentAsUser']]);
+        // $this->middleware('permission:user-create', ['only' => ['create','store']]);
+        // $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
+        // $this->middleware('permission:user-delete', ['only' => ['destroy']]);
     }
 
     /**
@@ -63,9 +64,11 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
+
         $request['password'] = Hash::make($request['password']);
         $user = User::create($request->all());
         $user->assignRole([$request->role]);
+
         return redirect('users/')
             ->withSuccess(__('Data Pengguna berhasil ditambahkan.'));
     }
@@ -107,6 +110,10 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+
+        $oldRole = $user->roles->first()->id;
+        $newRole = $request['role'];
+
         if ($request['username'] == $user->username) {
             $request = Arr::except($request,array('username'));
         }
@@ -130,6 +137,12 @@ class UserController extends Controller
         $user->update($input);
         DB::table('model_has_roles')->where('model_id',$user->id)->delete();
         $user->assignRole($request->input('role'));
+
+        if (Auth::user()->name != 'Admin') {
+            if ($oldRole != $newRole) {
+                return redirect('home/');
+            }
+        }
 
         return redirect('users/')
             ->withSuccess(__('Data Pengguna berhasil diperbarui.'));

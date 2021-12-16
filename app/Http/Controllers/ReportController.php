@@ -9,6 +9,12 @@ use PDF;
 
 class ReportController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:permission-report', ['only' => ['index','download']]);
+    }
+
     public function index()
     {
         $listYear = Transaction::select(DB::raw("(DATE_FORMAT(date_start, '%Y')) as year"))

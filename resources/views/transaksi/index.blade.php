@@ -14,6 +14,16 @@
         <div class="card">
             <div class="card-header">
                 <h4>List Transaksi Peminjaman Berjalan</h4>
+                <div class="card-header-form mr-3">
+                    <form action="{{ url('transactions/search') }}" method="get">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="name" placeholder="Cari siswa">
+                            <div class="input-group-btn">
+                                <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <div class="card-header-button">
                     <a href="{{ url('transactions/create') }}" class="btn btn-lg btn-icon icon-left btn-primary" style="border-radius: 5px !important;"><i class="fas fa-plus-circle"></i> Transaksi Baru</a>
                 </div>

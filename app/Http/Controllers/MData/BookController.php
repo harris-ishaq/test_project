@@ -13,11 +13,11 @@ class BookController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission:book-list|book-create|book-edit|book-delete', ['only' => ['index','show']]);
-        $this->middleware('permission:book-create', ['only' => ['create','store']]);
-        $this->middleware('permission:book-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:book-delete', ['only' => ['destroy']]);
-        $this->middleware('permission:book-search', ['only' => ['search']]);
+        $this->middleware('permission:permission-books', ['only' => ['index','create','store','edit','update','destroy','search']]);
+        // $this->middleware('permission:book-create', ['only' => ['create','store']]);
+        // $this->middleware('permission:book-edit', ['only' => ['edit','update']]);
+        // $this->middleware('permission:book-delete', ['only' => ['destroy']]);
+        // $this->middleware('permission:book-search', ['only' => ['search']]);
     }
 
     /**

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CreateTransactionRequest;
 use App\Models\Transaction;
 use App\Models\Book;
+use App\Models\Student;
 use Carbon\Carbon;
 use DB;
 
@@ -15,10 +16,10 @@ class TransactionController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission:transaction-list|transaction-create|transaction-edit|transaction-delete', ['only' => ['index','show']]);
-        $this->middleware('permission:transaction-create', ['only' => ['create','store']]);
-        $this->middleware('permission:transaction-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:transaction-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:permission-transaction', ['only' => ['index','create','store','edit','update','destroy','search','returnBook','saveReturned','cancel','indexDenda','bayar']]);
+        // $this->middleware('permission:transaction-create', ['only' => ['create','store']]);
+        // $this->middleware('permission:transaction-edit', ['only' => ['edit','update']]);
+        // $this->middleware('permission:transaction-delete', ['only' => ['destroy']]);
     }
 
     /**
@@ -292,6 +293,24 @@ class TransactionController extends Controller
 
         return view('transaksi.index-denda', [
             'datas' => Transaction::where('status', 'denda')->orderBy('updated_at', 'desc')->paginate(5)
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        // dd($request);
+        $search = $request->validate([
+            'name' => 'required|max:255',
+        ],[
+            'name.required' => 'Field harus diisi.',
+        ]);
+
+
+        $student = Student::select('id')->where('name', 'LIKE', '%'.$search['name'].'%')->get()->pluck('id');
+        $listTransaction = Transaction::whereIn('students_id', $student)->paginate(5);
+        // dd($listTransaction);
+        return view('transaksi.index', [
+            'datas' => $listTransaction
         ]);
     }
 }

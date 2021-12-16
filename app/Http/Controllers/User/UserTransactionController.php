@@ -12,6 +12,12 @@ use Carbon\Carbon;
 
 class UserTransactionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:permission-transaction', ['only' => ['index','create','store']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -37,7 +43,7 @@ class UserTransactionController extends Controller
 
         return view('user.add-form',
         [
-            'data'  => $studentId = Student::where('nis', Auth::user()->username)->first(),
+            'data'  => Student::where('nis', Auth::user()->username)->first(),
             'books' => Book::where('qty', '>', '0')->get()
         ]);
     }

@@ -18,46 +18,54 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $permission_list = [
-            'user-list',
-            'user-create',
-            'user-edit',
-            'user-delete',
-            'student-list',
-            'student-create',
-            'student-edit',
-            'student-delete',
-            'student-search',
-            'book-list',
-            'book-create',
-            'book-edit',
-            'book-delete',
-            'book-search',
-            'transaction-list',
-            'transaction-create',
-            'transaction-edit',
-            'transaction-delete'
-         ];
+        // $permission_list = [
+        //     'user-list',
+        //     'user-create',
+        //     'user-edit',
+        //     'user-delete',
+        //     'student-list',
+        //     'student-create',
+        //     'student-edit',
+        //     'student-delete',
+        //     'student-search',
+        //     'book-list',
+        //     'book-create',
+        //     'book-edit',
+        //     'book-delete',
+        //     'book-search',
+        //     'transaction-list',
+        //     'transaction-create',
+        //     'transaction-edit',
+        //     'transaction-delete'
+        //  ];
 
-        foreach ($permission_list as $permissions) {
-            Permission::create(['name' => $permissions]);
-        }
-
-         $user = User::create([
+        $user = User::create([
             'name' => 'Admin',
             'username' => 'admin',
             'password' => Hash::make('admin123')
         ]);
 
-        $role = Role::create(['name' => 'Admin']);
+        $listPermissionAdmin = explode(',', config('permission_list.permission.Admin'));
+        foreach ($listPermissionAdmin as $permissions) {
+            Permission::create(['name' => $permissions]);
+        }
+        $roleAdmin = Role::create(['name' => 'Admin']);
+        $permissionsAdmin = Permission::whereIn('name', $listPermissionAdmin)->pluck('id','id')->all();
+        $roleAdmin->syncPermissions($permissionsAdmin);
+        $user->assignRole([$roleAdmin->id]);
 
-        $permissions = Permission::pluck('id','id')->all();
+        $rolePengguna = Role::create(['name' => 'Pengguna']);
+        $listPermissionPengguna = explode(',', config('permission_list.permission.Pengguna'));
+        foreach ($listPermissionPengguna as $permissions) {
+            Permission::create(['name' => $permissions]);
+        }
+        $permissionsPengguna = Permission::whereIn('name', $listPermissionPengguna)->pluck('id','id')->all();
+        $rolePengguna->syncPermissions($permissionsPengguna);
 
-        $role->syncPermissions($permissions);
+        $roleKepSek = Role::create(['name' => 'Kepala Sekolah']);
+        $listPermissionKepSek = explode(',', config('permission_list.permission.Kepala Sekolah'));
+        $permissionsKepSek = Permission::whereIn('name', $listPermissionKepSek)->pluck('id','id')->all();
+        $roleKepSek->syncPermissions($permissionsKepSek);
 
-        $user->assignRole([$role->id]);
-
-        Role::create(['name' => 'Pengguna']);
-        Role::create(['name' => 'Kepala Sekolah']);
     }
 }
