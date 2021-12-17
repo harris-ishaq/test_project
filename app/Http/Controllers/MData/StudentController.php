@@ -5,6 +5,7 @@ namespace App\Http\Controllers\MData;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\User;
 use App\Http\Requests\CreateStudentRequest;
 use Illuminate\Support\Arr;
 
@@ -101,6 +102,20 @@ class StudentController extends Controller
             'gender' => 'required|in:Laki - Laki,Perempuan',
         ]);
 
+        if (isset($input['nis'])){
+            $newUsername = User::where('username', $input['nis'])->first();
+            if($newUsername) {
+                return redirect()->back()
+                   ->withErrors(['msg' => 'NIS tidak dapat dirubah karena terhubung dengan akun Pengguna sistem Perpustakaan.']);
+            } else {
+                $user = User::where('username', $data->nis)->first();
+                if($user){
+                    $user->username = $input['nis'];
+                    $user-update();
+                }
+            }
+        }
+
         $data->update($input);
         return redirect('students/')
             ->withSuccess(__('Data Siswa berhasil diperbarui.'));
@@ -114,6 +129,8 @@ class StudentController extends Controller
      */
     public function destroy(Student $data)
     {
+        $user = User::where('username', $data->nis)->first();
+        $user->delete();
         $data->delete();
         return redirect('students/')
             ->withSuccess(__('Data Siswa berhasil dihapus.'));

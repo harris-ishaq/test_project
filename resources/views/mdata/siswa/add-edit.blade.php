@@ -17,6 +17,15 @@
     <div class="section-body">
         <div class="row ">
             <div class="col-12 col-md- col-lg-12">
+            @if(isset ($errors) && count($errors) > 0)
+                <div class="alert alert-danger alert-notification alert-dismissible fade show">
+                    <ul class="list-unstyled mb-0">
+                        @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
                 <div class="card">
                     <div class="card-header">
                     @if ($edit)
