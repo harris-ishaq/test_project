@@ -3,7 +3,7 @@
         <div class="sidebar-brand">
             <a href="{{ url('home') }}">SIM Perpus</a>
             <p class="mt-0">
-                <small>SDN 001 Muara Bengal</small>
+                <small>SDN 001 Muara Bengkal</small>
             </p>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
@@ -11,7 +11,7 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header" style="color: #A23E48; font-weight: bold;">Dashboard</li>
-            <li class="nav-item dropdown">
+            <li class="nav-item  {{ Request::is('home*') ? 'active' : '' }}">
                 <a href="{{ url('home') }}" class="nav-link">
                     <i class="fas fa-fire"></i>
                     <span>Dashboard</span>

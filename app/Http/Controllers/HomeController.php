@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Transaction;
+use App\Models\Book;
+use App\Models\Student;
+use App\Models\User;
+Use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -23,6 +29,25 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if (Auth::user()->hasRole('Pengguna')) {
+            $students = Student::where('nis', Auth::user()->username)->first();
+            return view('home', [
+                'transaction'   => Transaction::where('students_id', $students->id)->count(),
+                'book'          => Book::where('qty', '>', 0)->count(),
+            ]);
+        } elseif (Auth::user()->hasRole('Kepala Sekolah')) {
+            return view('home', [
+                'transaction'   => Transaction::whereYear('date_start', Carbon::now()->year)->count(),
+                'book'          => Book::count(),
+                'student'       => Student::count(),
+            ]);
+        } else {
+            return view('home', [
+                'transaction'   => Transaction::whereYear('date_start', Carbon::now()->year)->count(),
+                'book'          => Book::count(),
+                'student'       => Student::count(),
+                'user'          => User::count(),
+            ]);
+        }
     }
 }

@@ -15,7 +15,7 @@ class UserTransactionController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission:permission-transaction', ['only' => ['index','create','store']]);
+        $this->middleware('permission:permission-user-transaction', ['only' => ['index','create','store']]);
     }
 
     /**

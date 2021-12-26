@@ -8,6 +8,9 @@
         hr.dash-line {
             border-top: 2px dashed black;
         }
+        table {
+            width: 100%;
+        }
         table, th, td {
             border: 1px solid black;
             border-collapse: collapse;
@@ -16,7 +19,7 @@
 
     <center>
         <h2 style="margin-bottom:0px;">Laporan Perpustakaan</h2><br>
-        <p style="margin-top:0px;">Bulan {{ $bulan_awal }} - {{ $bulan_akhir }} {{ $year }}<br> SDN 001 Muara Bengal</p>
+        <p style="margin-top:0px;">Bulan {{ $bulan_awal }} - {{ $bulan_akhir }} {{ $year }}<br> SDN 001 Muara Bengkal</p>
     </center>
     <hr>
 	<table border="1" class="table">
