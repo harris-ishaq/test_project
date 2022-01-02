@@ -80,18 +80,18 @@
                                     <div class="form-group">
                                         <label>Hak Akses</label>
                                         @if ($edit)
-                                            @if ($data->hasRole('Pengguna'))
+                                            <!-- @if ($data->hasRole('Pengguna'))
                                                 <input type="text" name="role-name" class="form-control @error('role') is-invalid @enderror"
                                                 value="Pengguna" {{ $edit ? ($data->hasRole('Pengguna') ? 'readonly' : '') : '' }}>
                                                 <input type="hidden" name="role" value="{{ $data->roles->pluck('id')->first() }}">
-                                            @else
+                                            @else -->
                                                 <select class="form-control @error('role') is-invalid @enderror" name="role">
                                                     <option hidden >Pilih Level Pengguna</option>
                                                     @foreach ($roles as $role)
                                                         <option value="{{ $role->id }}" {{ $edit ? ($role->id == $data->roles->pluck('id')->first() ? 'selected' : '') : '' }}>{{ $role->name }}</option>
                                                     @endforeach
                                                 </select>
-                                            @endif
+                                            <!-- @endif -->
                                         @else
                                             <select class="form-control @error('role') is-invalid @enderror" name="role">
                                                 <option hidden >Pilih Level Pengguna</option>

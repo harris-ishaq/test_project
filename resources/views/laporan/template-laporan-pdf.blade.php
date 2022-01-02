@@ -30,7 +30,7 @@
 				<th class="text-center">Nama</th>
 				<th class="text-center">Judul Buku</th>
 				<th class="text-center">Tanggal Pinjam</th>
-                <th class="text-center">Tanggal Kembali</th>
+                <th class="text-center">Batas Kembali</th>
                 <th class="text-center">Denda</th>
 			</tr>
         </thead>
@@ -38,14 +38,14 @@
             @if (count($datas) > 0)
                 @foreach($datas as $no=>$data)
                 <tr>
-                    <td class="text-center">{{ $no+1 }}</td>
-                    <td class="text-center">{{ $data->studentInformation->nis }}</td>
-                    <td class="text-center">{{ $data->studentInformation->name }}</td>
-                    <td class="text-center">{{ $data->bookInformation->title }}</td>
-                    <td class="text-center">{{ $data->date_start->format('d-m-Y') }}</td>
-                    <td class="text-center">{{ $data->date_return->format('d-m-Y') }}</td>
-                    <td>
-                        @if ($data->status == 'denda')
+                    <td style="text-align:center">{{ $no+1 }}</td>
+                    <td style="text-align:center">{{ $data->studentInformation->nis }}</td>
+                    <td style="text-align:center">{{ $data->studentInformation->name }}</td>
+                    <td style="text-align:center">{{ $data->bookInformation->title }}</td>
+                    <td style="text-align:center">{{ $data->date_start->format('d-m-Y') }}</td>
+                    <td style="text-align:center">{{ $data->date_return->format('d-m-Y') }}</td>
+                    <td style="text-align:center">
+                        @if ($data->date_returned > $data->date_return)
                             Ya
                         @else
                             Tidak
@@ -54,7 +54,14 @@
                 </tr>
                 @endforeach
             @else
+            <tr>
+                <td colspan="7" class="text-align:center">Belum ada data</td>
+            </tr>
             @endif
+            <tr>
+                <td colspan="6" style="text-align:center">Jumlah Denda</td>
+                <td style="text-align:center">{{ number_format(round($denda),0,",",".") }}</td>
+            </tr>
         </tbody>
     </table>
 </body>

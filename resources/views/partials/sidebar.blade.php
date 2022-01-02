@@ -56,8 +56,7 @@
                         <span>Laporan</span>
                     </a>
                 </li>
-            @elseif (Auth::user()->hasRole('Pengguna'))
-                <li class="menu-header" style="color: #A23E48; font-weight: bold;">Transaksi</li>
+                <!-- <li class="menu-header" style="color: #A23E48; font-weight: bold;">Transaksi</li>
                 <li class="nav-item {{ Request::is('user-transactions/create*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ url('user-transactions/create') }}">
                         <i class="fas fa-exchange-alt"></i>
@@ -69,7 +68,7 @@
                         <i class="fas fa-exchange-alt"></i>
                         <span>List Peminjaman</span>
                     </a>
-                </li>
+                </li> -->
             @elseif (Auth::user()->hasRole('Kepala Sekolah'))
                 <li class="menu-header" style="color: #A23E48; font-weight: bold;">Laporan</li>
                 <li class="nav-item {{ Request::is('reports*') ? 'active' : '' }}">

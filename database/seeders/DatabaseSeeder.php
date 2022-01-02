@@ -54,13 +54,13 @@ class DatabaseSeeder extends Seeder
         $roleAdmin->syncPermissions($permissionsAdmin);
         $user->assignRole([$roleAdmin->id]);
 
-        $rolePengguna = Role::create(['name' => 'Pengguna']);
-        $listPermissionPengguna = explode(',', config('permission_list.permission.Pengguna'));
-        foreach ($listPermissionPengguna as $permissions) {
-            Permission::create(['name' => $permissions]);
-        }
-        $permissionsPengguna = Permission::whereIn('name', $listPermissionPengguna)->pluck('id','id')->all();
-        $rolePengguna->syncPermissions($permissionsPengguna);
+        // $rolePengguna = Role::create(['name' => 'Pengguna']);
+        // $listPermissionPengguna = explode(',', config('permission_list.permission.Pengguna'));
+        // foreach ($listPermissionPengguna as $permissions) {
+        //     Permission::create(['name' => $permissions]);
+        // }
+        // $permissionsPengguna = Permission::whereIn('name', $listPermissionPengguna)->pluck('id','id')->all();
+        // $rolePengguna->syncPermissions($permissionsPengguna);
 
         $roleKepSek = Role::create(['name' => 'Kepala Sekolah']);
         $listPermissionKepSek = explode(',', config('permission_list.permission.Kepala Sekolah'));

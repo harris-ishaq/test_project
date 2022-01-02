@@ -52,7 +52,7 @@ class UserController extends Controller
         return view('mdata.user.add-edit',
         [
             'edit' => false,
-            'roles' => Role::select(['id', 'name'])->where('name', '!=', 'Pengguna')->get()
+            'roles' => Role::select(['id', 'name'])->get()
         ]);
     }
 

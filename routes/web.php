@@ -74,11 +74,11 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('/search', [App\Http\Controllers\Transaksi\TransactionController::class, 'search']);
     });
 
-    Route::group(['prefix' => 'user-transactions'], function () {
-        Route::get('/list', [App\Http\Controllers\User\UserTransactionController::class, 'index']);
-        Route::get('/create', [App\Http\Controllers\User\UserTransactionController::class, 'create']);
-        Route::post('/store', [App\Http\Controllers\User\UserTransactionController::class, 'store']);
-    });
+    // Route::group(['prefix' => 'user-transactions'], function () {
+    //     Route::get('/list', [App\Http\Controllers\User\UserTransactionController::class, 'index']);
+    //     Route::get('/create', [App\Http\Controllers\User\UserTransactionController::class, 'create']);
+    //     Route::post('/store', [App\Http\Controllers\User\UserTransactionController::class, 'store']);
+    // });
 
     Route::group(['prefix' => 'reports'], function () {
         Route::get('/', [App\Http\Controllers\ReportController::class, 'index']);

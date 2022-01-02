@@ -37,7 +37,7 @@
                                 <th scope="col">Nomor Induk Siswa</th>
                                 <th scope="col">Nama</th>
                                 <th scope="col">Jenis Kelamin</th>
-                                <th scope="col" style="width:30%"></th>
+                                <th scope="col" style="width:15%"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,7 +51,7 @@
                                         <td>
                                             <a href="{{ url('students/'.$data->id.'/edit') }}" class="btn btn-sm btn-info">Edit</a>&#9;
                                             <a href="{{ url('students/'.$data->id.'/destroy') }}" class="btn btn-sm btn-danger">Delete</a>&#9;
-                                            <a href="{{ url('students/'.$data->id.'/add-as-users') }}" class="btn btn-sm btn-success">Tambah Sebagai Pengguna</a>
+                                            <!-- <a href="{{ url('students/'.$data->id.'/add-as-users') }}" class="btn btn-sm btn-success">Tambah Sebagai Pengguna</a> -->
                                         </td>
                                     </tr>
                                 @endforeach

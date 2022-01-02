@@ -6,8 +6,7 @@
         <h1>Dashboard</h1>
     </div>
     <div class="row">
-        @if(Auth::user()->hasRole('Pengguna'))
-        <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+        <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-12">
             <div class="card card-statistic-1">
                 <div class="card-icon bg-primary">
                     <a href="#"><i class="fas fa-book"></i></a>
@@ -36,8 +35,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        @elseif(Auth::user()->hasRole('Kepala Sekolah'))
+        </div> -->
+        @if(Auth::user()->hasRole('Kepala Sekolah'))
         <div class="col-lg-4 col-md-6 col-sm-6 col-12">
             <div class="card card-statistic-1">
                 <div class="card-icon bg-primary">
@@ -146,5 +145,18 @@
         </div>
         @endif
     </div>
+    @if(Auth::user()->hasRole('Admin'))
+        @if($denda>0)
+            <div class="hero bg-primary text-white">
+                <div class="hero-inner">
+                    <h2>Pengingat Denda!</h2>
+                    <p class="lead">Terdapat {{ $denda }} siswa yang belum menyelesaikan denda transaksi.</p>
+                    <div class="mt-4">
+                        <a href="{{ url('transactions/denda') }}" class="btn btn-outline-white btn-lg btn-icon icon-left">Lihat List Denda</a>
+                    </div>
+                </div>
+            </div>
+        @endif
+    @endif
 </div>
 @endsection

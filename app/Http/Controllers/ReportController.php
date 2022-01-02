@@ -40,6 +40,16 @@ class ReportController extends Controller
             ->whereYear('date_start', $input['year'])
             ->get();
 
+        $countDenda = 0;
+        foreach ($datas as $key => $data) {
+            if ($data->date_returned > $data->date_return) {
+                $countDenda++;
+            }
+        }
+
+        $denda = $countDenda * 20000;
+        // dd($denda);
+
         $month_list = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
         // dd('Laporan Perpustakaan ('.$month_list[$months[0]-1].' - '.$month_list[$months[1]-1].'.pdf');
@@ -47,7 +57,8 @@ class ReportController extends Controller
                 'datas'         => $datas,
                 'bulan_awal'    => $month_list[$months[0]-1],
                 'bulan_akhir'   => $month_list[$months[1]-1],
-                'year'          => $input['year']
+                'year'          => $input['year'],
+                'denda'         => $denda
             ]);
 
         return $pdf->download('Laporan Perpustakaan ('.$month_list[$months[0]-1].' - '.$month_list[$months[1]-1].').pdf');
