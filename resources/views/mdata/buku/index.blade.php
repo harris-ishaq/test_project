@@ -35,12 +35,14 @@
                             <tr>
                                 <th scope="col" style="width:5%">#</th>
                                 <th scope="col">Kode Buku</th>
+                                <th scope="col">No. ISBN</th>
                                 <th scope="col">Judul</th>
                                 <th scope="col">Penulis</th>
                                 <th scope="col">Penerbit</th>
+                                <th scope="col">Tahun Terbit</th>
                                 <th scope="col">Stok</th>
-                                <th scope="col">Tanggal Entry</th>
-                                <th scope="col" style="width:20%"></th>
+                                <th scope="col">Tanggal Masuk</th>
+                                <th scope="col" style="width:15%"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,9 +51,11 @@
                                     <tr>
                                         <td scope="row">{{ $loop->iteration }}</td>
                                         <td>{{ $data->code_book }}</td>
+                                        <td>{{ $data->isbn }}</td>
                                         <td>{{ $data->title }}</td>
                                         <td>{{ $data->author }}</td>
                                         <td>{{ $data->publisher }}</td>
+                                        <td>{{ $data->year }}</td>
                                         <td>{{ $data->qty }}</td>
                                         <td>{{ $data->created_at->format('Y-m-d')}}</td>
                                         <td><a href="{{ url('books/'.$data->id.'/edit') }}" class="btn btn-info">Edit</a>&#9;<a href="{{ url('books/'.$data->id.'/destroy') }}" class="btn btn-danger">Delete</a></td>

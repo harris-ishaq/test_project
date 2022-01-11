@@ -38,10 +38,16 @@
                     </a>
                 </li>
                 <li class="menu-header" style="color: #A23E48; font-weight: bold;">Transaksi</li>
-                <li class="nav-item {{ Request::is('transactions*') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ url('transactions/') }}">
+                <li class="nav-item {{ Request::is('transactions') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ url('transactions') }}">
                         <i class="fas fa-exchange-alt"></i>
-                        <span>Pinjam & Kembali</span>
+                        <span>Transaksi Pinjam</span>
+                    </a>
+                </li>
+                <li class="nav-item {{ Request::is('transactions/kembali') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ url('transactions/kembali') }}">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Transaksi Kembali</span>
                     </a>
                 </li>
                 <li class="nav-item {{ Request::is('transactions/denda*') ? 'active' : '' }}">

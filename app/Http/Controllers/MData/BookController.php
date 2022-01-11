@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Http\Requests\CreateBookRequest;
 use Illuminate\Support\Arr;
+use Carbon\Carbon;
 
 class BookController extends Controller
 {
@@ -40,9 +41,11 @@ class BookController extends Controller
      */
     public function create()
     {
+        $currentYear = Carbon::now()->format('Y');
         return view('mdata.buku.add-edit',
         [
-            'edit' => false
+            'edit' => false,
+            'year' => (int)$currentYear
         ]);
     }
 
@@ -79,7 +82,8 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        return view('mdata.buku.add-edit', ['edit' => true, 'data' => $book]);
+        $currentYear = Carbon::now()->format('Y');
+        return view('mdata.buku.add-edit', ['edit' => true, 'data' => $book, 'year' => (int)$currentYear]);
     }
 
     /**
@@ -91,17 +95,28 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
+        $newRequest = $request;
         if ($request['code_book'] == $book->code_book) {
-            $request = Arr::except($request,array('code_book'));
+            $newRequest = Arr::except($request,array('code_book'));
         }
 
-        $input = $request->validate([
-            'code_book' => 'sometimes|integer|digits_between:1,255|unique:books,code_book',
+        if ($request['isbn'] == $book->isbn) {
+            $newRequest = Arr::except($newRequest,array('isbn'));
+        }
+
+        // dd($newRequest);
+
+        $input = $newRequest->validate([
+            'code_book' => 'sometimes|unique:books,code_book',
+            'isbn'      => 'sometimes|unique:books,isbn',
             'title'     => 'required|max:255',
             'publisher' => 'required|max:255',
+            'year'      => 'required',
             'author'    => 'required|max:255',
             'qty'       => 'required|integer|min:0',
         ]);
+
+        // dd($input);
 
         $book->update($input);
         return redirect('books/')

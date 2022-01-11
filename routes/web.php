@@ -61,6 +61,7 @@ Route::group(['middleware' => ['auth']], function(){
 
     Route::group(['prefix' => 'transactions'], function () {
         Route::get('/', [App\Http\Controllers\Transaksi\TransactionController::class, 'index']);
+        Route::get('/kembali', [App\Http\Controllers\Transaksi\TransactionController::class, 'indexKembali']);
         Route::get('/create', [App\Http\Controllers\Transaksi\TransactionController::class, 'create']);
         Route::post('/store', [App\Http\Controllers\Transaksi\TransactionController::class, 'store']);
         Route::get('/{transaction}/return', [App\Http\Controllers\Transaksi\TransactionController::class, 'returnBook']);
@@ -72,6 +73,7 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('/denda', [App\Http\Controllers\Transaksi\TransactionController::class, 'indexDenda']);
         Route::get('/denda/{transaction}', [App\Http\Controllers\Transaksi\TransactionController::class, 'bayar']);
         Route::get('/search', [App\Http\Controllers\Transaksi\TransactionController::class, 'search']);
+        Route::get('/search/kembali', [App\Http\Controllers\Transaksi\TransactionController::class, 'searchKembali']);
     });
 
     // Route::group(['prefix' => 'user-transactions'], function () {

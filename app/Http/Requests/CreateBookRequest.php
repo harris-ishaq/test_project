@@ -25,9 +25,11 @@ class CreateBookRequest extends FormRequest
     public function rules()
     {
         return [
-            'code_book' => 'required|integer|digits_between:1,255|unique:books,code_book',
+            'code_book' => 'required|unique:books,code_book',
+            'isbn'      => 'required|integer|digits_between:1,255|unique:books,isbn',
             'title'     => 'required|max:255',
             'publisher' => 'required|max:255',
+            'year'      => 'required|min:4',
             'author'    => 'required|max:255',
             'qty'       => 'required|integer|min:0',
         ];

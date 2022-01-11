@@ -3,7 +3,7 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Transaksi Pinjam</h1>
+        <h1>Transaksi Kembali</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item"><a href="#">Dashboard</a></div>
             <div class="breadcrumb-item active"><a href="{{ url('transactions/') }}">Transaksi</a></div>
@@ -13,9 +13,9 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4>List Transaksi Peminjaman Berjalan</h4>
+                <h4>List Transaksi Kembali</h4>
                 <div class="card-header-form mr-3">
-                    <form action="{{ url('transactions/search') }}" method="get">
+                    <form action="{{ url('transactions/search/kembali') }}" method="get">
                         <div class="input-group">
                             <input type="text" class="form-control" name="name" placeholder="Cari siswa">
                             <div class="input-group-btn">
@@ -24,9 +24,9 @@
                         </div>
                     </form>
                 </div>
-                <div class="card-header-button">
+                <!-- <div class="card-header-button">
                     <a href="{{ url('transactions/create') }}" class="btn btn-lg btn-icon icon-left btn-primary" style="border-radius: 5px !important;"><i class="fas fa-plus-circle"></i> Transaksi Baru</a>
-                </div>
+                </div> -->
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -39,8 +39,9 @@
                                 <th scope="col">Peminjam</th>
                                 <th scope="col">Tanggal Peminjaman</th>
                                 <th scope="col">Tenggat Waktu</th>
+                                <th scope="col">Tanggal Kembali</th>
                                 <th scope="col">Status</th>
-                                <th scope="col" style="width:22%"></th>
+                                <th scope="col" style="width:15%"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,6 +53,11 @@
                                         <td>{{ $data->bookInformation->title }}</td>
                                         <td>{{ $data->studentInformation->name }}</td>
                                         <td>{{ $data->date_start->format('d-m-Y') }}</td>
+                                        @if ($data->date_returned)
+                                            <td>{{ $data->date_returned->format('d-m-Y') }}</td>
+                                        @else
+                                            <td></td>
+                                        @endif
                                         @if ($data->date_return)
                                             <td>{{ $data->date_return->format('d-m-Y') }}</td>
                                         @else
@@ -66,12 +72,8 @@
                                                 <div class="badge badge-danger">{{ ucfirst($data->status) }}</div></td>
                                             @endif
                                         <td>
-                                            @if ($data->status == 'aktif')
-                                                <a href="{{ url('transactions/'.$data->id.'/return') }}" class="btn btn-sm btn-success">Pengembalian</a>&#9;
-                                                <a href="{{ url('transactions/'.$data->id.'/edit') }}" class="btn btn-sm btn-info">Edit</a>&#9;
-                                            @else
-                                                <a href="{{ url('transactions/'.$data->id.'/cancel') }}" class="btn btn-sm btn-warning">Cancel</a>&#9;
-                                            @endif
+                                            <!-- <a href="{{ url('transactions/'.$data->id.'/edit') }}" class="btn btn-sm btn-info">Edit</a>&#9; -->
+                                            <a href="{{ url('transactions/'.$data->id.'/cancel') }}" class="btn btn-sm btn-warning">Cancel</a>&#9;
                                             <a href="{{ url('transactions/'.$data->id.'/destroy') }}" class="btn btn-sm btn-danger">Delete</a>
                                         </td>
                                     </tr>

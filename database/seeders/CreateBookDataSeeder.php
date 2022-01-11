@@ -15,22 +15,28 @@ class CreateBookDataSeeder extends Seeder
     public function run()
     {
         $books = array([
-            'code_book' => '1684155584',
+            'code_book' => 'S1684155584',
+            'isbn' => '1684155584',
             'title' => 'Something is Killing the Children, Vol. 1',
             'author' => 'James Tynion IV',
             'publisher' => 'Indie',
+            'year' => '2020',
             'qty' => '3',
         ],[
-            'code_book' => '1684156491',
+            'code_book' => 'S1684156491',
+            'isbn' => '1684156491',
             'title' => 'Something is Killing the Children, Vol. 2',
             'author' => 'James Tynion IV',
             'publisher' => 'Indie',
+            'year' => '2020',
             'qty' => '2',
         ],[
-            'code_book' => '1250760437',
+            'code_book' => 'I1250760437',
+            'isbn' => '1250760437',
             'title' => 'I Will Not Die Alone',
             'author' => 'Dera White',
             'publisher' => 'Indie',
+            'year' => '2021',
             'qty' => '2',
         ]);
         foreach ($books as $book) {

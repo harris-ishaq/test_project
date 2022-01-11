@@ -62,6 +62,16 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
+                                        <label>No. ISBN</label>
+                                        <input type="text" name="isbn" class="form-control @error('isbn') is-invalid @enderror"
+                                            value="{{ $edit ? $data->isbn : old('isbn') }}">
+                                        @error('isbn')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
                                         <label>Judul</label>
                                         <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
                                             value="{{ $edit ? $data->title : old('title') }}">
@@ -90,6 +100,15 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Tahun Terbit</label>
+                                        <select class="form-control @error('year') is-invalid @enderror" name="year">
+                                            <option hidden >Pilih Tahun Terbit</option>
+                                            @for ($i = $year; $i > $year-50; $i--)
+                                                <option value="{{ $i }}" {{ $edit ? ($i == $data->year ? 'selected' : '') : '' }}>{{ $i }}</option>
+                                            @endfor
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label>Jumlah Buku</label>

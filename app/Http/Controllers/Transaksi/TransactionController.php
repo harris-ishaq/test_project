@@ -31,7 +31,15 @@ class TransactionController extends Controller
     {
         //$transaksi = Transaction::where('status', 'aktif')->latest()->paginate(5);
         return view('transaksi.index', [
-            'datas' => Transaction::latest()->paginate(5)
+            'datas' => Transaction::where('status', 'aktif')->latest()->paginate(5)
+        ]);
+    }
+
+    public function indexKembali()
+    {
+        //$transaksi = Transaction::where('status', 'aktif')->latest()->paginate(5);
+        return view('transaksi.index-kembali', [
+            'datas' => Transaction::where('status', '!=', 'aktif')->latest()->paginate(5)
         ]);
     }
 
@@ -307,7 +315,25 @@ class TransactionController extends Controller
 
 
         $student = Student::select('id')->where('name', 'LIKE', '%'.$search['name'].'%')->get()->pluck('id');
-        $listTransaction = Transaction::whereIn('students_id', $student)->paginate(5);
+        $listTransaction = Transaction::where('status', 'aktif')->whereIn('students_id', $student)->paginate(5);
+        // dd($listTransaction);
+        return view('transaksi.index', [
+            'datas' => $listTransaction
+        ]);
+    }
+
+    public function searchKembali(Request $request)
+    {
+        // dd($request);
+        $search = $request->validate([
+            'name' => 'required|max:255',
+        ],[
+            'name.required' => 'Field harus diisi.',
+        ]);
+
+
+        $student = Student::select('id')->where('name', 'LIKE', '%'.$search['name'].'%')->get()->pluck('id');
+        $listTransaction = Transaction::where('status', '!=', 'aktif')->whereIn('students_id', $student)->paginate(5);
         // dd($listTransaction);
         return view('transaksi.index', [
             'datas' => $listTransaction
