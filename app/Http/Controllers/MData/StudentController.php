@@ -129,8 +129,6 @@ class StudentController extends Controller
      */
     public function destroy(Student $data)
     {
-        $user = User::where('username', $data->nis)->first();
-        $user->delete();
         $data->delete();
         return redirect('students/')
             ->withSuccess(__('Data Siswa berhasil dihapus.'));
