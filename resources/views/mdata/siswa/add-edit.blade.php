@@ -80,19 +80,43 @@
                                             </span>
                                         @enderror
                                     </div>
-                                    <div class="form-group">
-                                        <label>Jenis Kelamin</label>
-                                        <select class="form-control @error('gender') is-invalid @enderror" name="gender">
-                                            <option hidden>Jenis Kelamin</option>
-                                            <option value="Laki - Laki" {{ $edit ? ('Laki - Laki' == $data->gender ? 'selected' : '') : '' }}>Laki - Laki</option>
-                                            <option value="Perempuan" {{ $edit ? ('Perempuan' == $data->gender ? 'selected' : '') : '' }}>Perempuan</option>
-                                        </select>
-                                        @error('gender')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                <label>Jenis Kelamin</label>
+                                                <select class="form-control @error('gender') is-invalid @enderror" name="gender">
+                                                    <option hidden>Jenis Kelamin</option>
+                                                    <option value="Laki - Laki" {{ $edit ? ('Laki - Laki' == $data->gender ? 'selected' : '') : '' }}>Laki - Laki</option>
+                                                    <option value="Perempuan" {{ $edit ? ('Perempuan' == $data->gender ? 'selected' : '') : '' }}>Perempuan</option>
+                                                </select>
+                                                @error('gender')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                <label>Kelas</label>
+                                                <select class="form-control @error('class') is-invalid @enderror" name="class">
+                                                    <option hidden>Pilih Kelas</option>
+                                                    <option value="1" {{ $edit ? ('1' == $data->class ? 'selected' : '') : '' }}>1</option>
+                                                    <option value="2" {{ $edit ? ('2' == $data->class ? 'selected' : '') : '' }}>2</option>
+                                                    <option value="3" {{ $edit ? ('3' == $data->class ? 'selected' : '') : '' }}>3</option>
+                                                    <option value="4" {{ $edit ? ('4' == $data->class ? 'selected' : '') : '' }}>4</option>
+                                                    <option value="5" {{ $edit ? ('5' == $data->class ? 'selected' : '') : '' }}>5</option>
+                                                    <option value="6" {{ $edit ? ('6' == $data->class ? 'selected' : '') : '' }}>6</option>
+                                                </select>
+                                                @error('class')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
                                     </div>
+
                                     <button type="submit" class="btn btn-primary float-left">
                                         {{ __($edit ? 'Update' : 'Create') }}
                                     </button> &nbsp;

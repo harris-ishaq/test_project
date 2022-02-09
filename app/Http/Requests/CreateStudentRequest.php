@@ -28,6 +28,7 @@ class CreateStudentRequest extends FormRequest
             'name'      => 'required|max:255',
             'nis'       => 'required|max:15|unique:students,nis',
             'gender'    => 'required|in:Laki - Laki,Perempuan',
+            'class'     => 'required|between:1,6',
         ];
     }
 }

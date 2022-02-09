@@ -18,6 +18,7 @@ class Student extends Model
         'name',
         'nis',
         'gender',
+        'class',
     ];
 
     public function Transaction()

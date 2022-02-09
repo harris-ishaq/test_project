@@ -28,7 +28,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $student = Student::latest()->paginate(5);
+        $student = Student::orderBy('class', 'asc')->orderBy('name', 'asc')->paginate(5);
         return view('mdata.siswa.index', [
             'datas' => $student
         ]);
@@ -100,6 +100,7 @@ class StudentController extends Controller
             'name' => 'required|max:225',
             'nis' => 'sometimes|max:15|unique:students,nis',
             'gender' => 'required|in:Laki - Laki,Perempuan',
+            'class' => 'required|between:1,6'
         ]);
 
         if (isset($input['nis'])){

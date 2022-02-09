@@ -36,6 +36,7 @@
                                 <th scope="col" style="width:5%">#</th>
                                 <th scope="col">Nomor Induk Siswa</th>
                                 <th scope="col">Nama</th>
+                                <th scope="col">Kelas</th>
                                 <th scope="col">Jenis Kelamin</th>
                                 <th scope="col" style="width:15%"></th>
                             </tr>
@@ -47,6 +48,7 @@
                                         <td scope="row">{{ $loop->iteration }}</td>
                                         <td>{{ $data->nis }}</td>
                                         <td>{{ $data->name }}</td>
+                                        <td>{{ $data->class }}</td>
                                         <td>{{ $data->gender }}</td>
                                         <td>
                                             <a href="{{ url('students/'.$data->id.'/edit') }}" class="btn btn-sm btn-info">Edit</a>&#9;
