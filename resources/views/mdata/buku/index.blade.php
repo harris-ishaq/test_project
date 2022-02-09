@@ -57,7 +57,7 @@
                                         <td>{{ $data->publisher }}</td>
                                         <td>{{ $data->year }}</td>
                                         <td>{{ $data->qty }}</td>
-                                        <td>{{ $data->created_at->format('Y-m-d')}}</td>
+                                        <td>{{ $data->entry_date}}</td>
                                         <td><a href="{{ url('books/'.$data->id.'/edit') }}" class="btn btn-info">Edit</a>&#9;<a href="{{ url('books/'.$data->id.'/destroy') }}" class="btn btn-danger">Delete</a></td>
                                     </tr>
                                 @endforeach

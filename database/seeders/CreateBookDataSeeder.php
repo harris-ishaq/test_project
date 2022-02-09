@@ -22,6 +22,7 @@ class CreateBookDataSeeder extends Seeder
             'publisher' => 'Indie',
             'year' => '2020',
             'qty' => '3',
+            'entry_date' => '2022-02-02',
         ],[
             'code_book' => 'S1684156491',
             'isbn' => '1684156491',
@@ -30,6 +31,7 @@ class CreateBookDataSeeder extends Seeder
             'publisher' => 'Indie',
             'year' => '2020',
             'qty' => '2',
+            'entry_date' => '2022-02-01',
         ],[
             'code_book' => 'I1250760437',
             'isbn' => '1250760437',
@@ -38,6 +40,7 @@ class CreateBookDataSeeder extends Seeder
             'publisher' => 'Indie',
             'year' => '2021',
             'qty' => '2',
+            'entry_date' => '2022-01-02',
         ]);
         foreach ($books as $book) {
             Book::create($book);

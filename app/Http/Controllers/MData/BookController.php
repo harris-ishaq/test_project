@@ -28,7 +28,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $book = Book::latest()->paginate(3);
+        $book = Book::orderBy('title', 'asc')->paginate(3);
         return view('mdata.buku.index', [
             'datas' => $book
         ]);
@@ -114,6 +114,7 @@ class BookController extends Controller
             'year'      => 'required',
             'author'    => 'required|max:255',
             'qty'       => 'required|integer|min:0',
+            'entry_date' => 'required',
         ]);
 
         // dd($input);

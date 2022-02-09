@@ -32,6 +32,7 @@ class CreateBookRequest extends FormRequest
             'year'      => 'required|min:4',
             'author'    => 'required|max:255',
             'qty'       => 'required|integer|min:0',
+            'entry_date' => 'required',
         ];
     }
 }

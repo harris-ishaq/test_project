@@ -22,6 +22,7 @@ class Book extends Model
         'publisher',
         'year',
         'qty',
+        'entry_date',
     ];
 
     /**

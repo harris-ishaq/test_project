@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('style')
+<link rel="stylesheet" href="{{ asset(('stisla/node_modules/bootstrap-daterangepicker/daterangepicker.css')) }}">
+@endsection
+
 @section('content')
 <section class="section">
     <div class="section-header">
@@ -120,6 +124,15 @@
                                             </span>
                                         @enderror
                                     </div>
+                                    <div class="form-group">
+                                        <label>Tanggal Masuk</label>
+                                        <input type="text" class="form-control datepicker" name="entry_date" value="{{ $edit ? $data->entry_date : old('entry_date') }}">
+                                        @error('entry_date')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
                                     <button type="submit" class="btn btn-primary float-left">
                                         {{ __($edit ? 'Update' : 'Create') }}
                                     </button> &nbsp;
@@ -135,3 +148,7 @@
 </div>
 @stop
 
+@section('scripts')
+<script src="{{ asset(('stisla/js/page/forms-advanced-forms.js')) }}"></script>
+<script src="{{ asset(('stisla/node_modules/bootstrap-daterangepicker/daterangepicker.js')) }}"></script>
+@endsection

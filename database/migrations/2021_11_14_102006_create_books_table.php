@@ -22,6 +22,7 @@ class CreateBooksTable extends Migration
             $table->string("publisher");
             $table->string("year");
             $table->string("qty");
+            $table->date("entry_date");
             $table->timestamps();
         });
     }
