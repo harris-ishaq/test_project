@@ -62,7 +62,13 @@
                     <td style="text-align:center">{{ $data->studentInformation->name }}</td>
                     <td style="text-align:center">{{ $data->bookInformation->title }}</td>
                     <td style="text-align:center">{{ $data->date_start->format('d-m-Y') }}</td>
-                    <td style="text-align:center">{{ $data->date_returned->format('d-m-Y') }}</td>
+                    <td style="text-align:center">
+                        @if ($data->date_returned)
+                            {{ $data->date_returned->format('d-m-Y') }}
+                        @else
+                            Belum Kembali
+                        @endif
+                    </td>
                     <td style="text-align:center">
                         @if ($data->date_returned > $data->date_return)
                             20.000
