@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Transaction;
 use DB;
 use PDF;
+use Carbon\Carbon;
 
 class ReportController extends Controller
 {
@@ -52,13 +53,18 @@ class ReportController extends Controller
 
         $month_list = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
+        $timeNow = Carbon::now();
+        // $report_date = $timeNow->format('d') + " " + $month_list[$timeNow->format('m')-1] + " " + $timeNow->format('Y');
         // dd('Laporan Perpustakaan ('.$month_list[$months[0]-1].' - '.$month_list[$months[1]-1].'.pdf');
         $pdf = PDF::loadview('laporan.template-laporan-pdf',[
                 'datas'         => $datas,
                 'bulan_awal'    => $month_list[$months[0]-1],
                 'bulan_akhir'   => $month_list[$months[1]-1],
                 'year'          => $input['year'],
-                'denda'         => $denda
+                'denda'         => $denda,
+                'tanggal' => $timeNow->format('d'),
+                'bulan' => $month_list[$timeNow->format('m')-1],
+                'tahun' => $timeNow->format('Y')
             ]);
 
         return $pdf->download('Laporan Perpustakaan ('.$month_list[$months[0]-1].' - '.$month_list[$months[1]-1].').pdf');

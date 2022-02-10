@@ -96,7 +96,7 @@
     <table style="border-collapse: collapse;" width="100%">
         <tr>
             <td class="noBorder" width="80" align="center"></td>
-            <td class="noBorder" width="20" style="text-align:center">Muara Bengkal, 4 Januari 2022</td>
+            <td class="noBorder" width="20" style="text-align:center">Muara Bengkal, {{ $tanggal }} {{ $bulan }} {{$tahun}}</td>
         </tr>
         <tr>
             <td class="noBorder" width="80" align="center"></td>
